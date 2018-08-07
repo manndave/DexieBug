@@ -2,43 +2,26 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) using [Nrwl Nx](https://nrwl.io/nx).
 
-## Nrwl Extensions for Angular (Nx)
+<h2>Dexie Test Project</h2>
 
-<a href="https://nrwl.io/nx"><img src="https://preview.ibb.co/mW6sdw/nx_logo.png"></a>
+ - Clone repo locally
+ - `Yarn`  or `npm` to get packages
+ - `Yarn run electron` to build and launch Electron
 
-Nx is an open source toolkit for enterprise Angular applications.
+From the HTML page:
 
-Nx is designed to help you create and build enterprise grade Angular applications. It provides an opinionated approach to application project structure and patterns.
-
-## Quick Start & Documentation
-
-[Watch a 5-minute video on how to get started with Nx.](http://nrwl.io/nx)
-
-## Generate your first application
-
-Run `ng generate app myapp` to generate an application. When using Nx, you can create multiple applications and libraries in the same CLI workspace. Read more [here](http://nrwl.io/nx).
-
-## Development server
-
-Run `ng serve --project=myapp` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng generate component component-name --project=myapp` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build --project=myapp` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-Before running the tests make sure you are serving the app via `ng serve`.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+To recreate the problem:
+<ol>
+    <li>Click the button below</li>
+    <li>Go into the Application tab of the Chrome Dev Tools</li>
+    <li>Refresh IndexedDB if "MyAppDatabase" DB isn't showing up</li>
+    <li>Once it is visible, confirm that it has two indices: first and last.  Each should show one record</li>
+    <li>Now click "MyAppDatabase" and then the "Refresh Database" button</li>
+    <li>Check the indices again.  One of them is blank - no headers, no content, etc.</li>
+    <li>Check the Console in VSCode (not the browser) - it will have an error similar to <b>Uncaught (in promise) TypeError: 
+        Cannot read property 'keyPath' of undefined</b></li>
+    <li>Once this happens, subsequent attempts to insert fail.</li>
+    <li>To test again, you need to manually delete the database from within the devtools.</li>
+</ol>
+>>>> For the record, I'm reasonably sure this is something I'm doing wrong, 
+but I can't for the life of me figure out what it is or where to look.
