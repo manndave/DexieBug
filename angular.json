@@ -2,13 +2,133 @@
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
   "newProjectRoot": "",
-  "projects": {},
+  "projects": {
+    "dexie": {
+      "root": "apps/dexie/",
+      "sourceRoot": "apps/dexie/src",
+      "projectType": "application",
+      "prefix": "apps/dexie1",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/dexie",
+            "index": "apps/dexie/src/index.html",
+            "main": "apps/dexie/src/main.ts",
+            "polyfills": "apps/dexie/src/polyfills.ts",
+            "tsConfig": "apps/dexie/tsconfig.app.json",
+            "assets": [
+              "apps/dexie/src/favicon.ico",
+              "apps/dexie/src/assets"
+            ],
+            "styles": [
+              "apps/dexie/src/styles.css"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/dexie/src/environments/environment.ts",
+                  "with": "apps/dexie/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "dexie:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "dexie:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "dexie:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "apps/dexie/src/test.ts",
+            "polyfills": "apps/dexie/src/polyfills.ts",
+            "tsConfig": "apps/dexie/tsconfig.spec.json",
+            "karmaConfig": "apps/dexie/karma.conf.js",
+            "styles": [
+              "apps/dexie/src/styles.css"
+            ],
+            "scripts": [],
+            "assets": [
+              "apps/dexie/src/favicon.ico",
+              "apps/dexie/src/assets"
+            ]
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/dexie/tsconfig.app.json",
+              "apps/dexie/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "dexie-e2e": {
+      "root": "apps/dexie-e2e/",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "apps/dexie-e2e/protractor.conf.js",
+            "devServerTarget": "dexie:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "dexie:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": "apps/dexie-e2e/tsconfig.e2e.json",
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    }
+  },
   "cli": {
     "warnings": {
       "typescriptMismatch": false,
       "versionMismatch": false
     },
     "defaultCollection": "@nrwl/schematics"
-    
-  }
+  },
+  "defaultProject": "dexie"
 }
